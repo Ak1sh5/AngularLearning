@@ -8,6 +8,7 @@ Number of Rooms:
 <button (click)="toggle()">Toggle</button>
 
 <div *ngIf="room.availableRooms>0">
-    <app-rooms-list [rooms]="roomList"></app-rooms-list>
+    
+    <app-rooms-list [rooms]="roomList"(roomsSelected)="selectedRoom($event)">></app-rooms-list>
 
 </div>

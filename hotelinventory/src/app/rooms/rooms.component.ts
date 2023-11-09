@@ -1,65 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+// rooms.component.ts
+
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Room, RoomList } from './room';
+import { RoomService } from './services/rooms.service';
+
+
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
-  styleUrls: ['./rooms.component.scss']
+  styleUrls: ['./rooms.component.scss'],
+  providers: [RoomService], // Add the service to the providers array
 })
-export class RoomsComponent implements OnInit {
-
-  hotelName='ABC hotel';
-  numberOfRooms=10;
-  hideRooms=false;
-
+export class RoomsComponent implements OnInit, OnDestroy {
+  hotelName = 'ABC hotel';
+  numberOfRooms = 10;
+  hideRooms = false;
+  room: Room = {
+    availableRooms: 20,
+    totalRooms: 33,
+    bookedRooms: 12,
+  };
+  
   toggle(){
     this.hideRooms=!this.hideRooms;
   }
- room:Room={
-    availableRooms:20,
-    totalRooms:33,
-    bookedRooms:12
-};
 
-roomList: RoomList[] = [
-  {
-    roomNumber:1,
-    roomType: 'Deluxe Room',
-    amenities: 'Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen',
-    price: 500,
-    photos:
-      'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-    checkinTime: new Date('11-Nov-2021'),
-    checkoutTime: new Date('12-Nov-2021'),
-    rating: 4.5,
-  },
-  {
-    roomNumber: 2,
-    roomType: 'Deluxe Room',
-    amenities: 'Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen',
-    price: 1000,
-    photos:
-      'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-    checkinTime: new Date('11-Nov-2021'),
-    checkoutTime: new Date('12-Nov-2021'),
-    rating: 3.45654,
-  },
-  {
-    roomNumber: 3,
-    roomType: 'Private Suite',
-    amenities: 'Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen',
-    price: 15000,
-    photos:
-      'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-    checkinTime: new Date('11-Nov-2021'),
-    checkoutTime: new Date('12-Nov-2021'),
-    rating: 2.6,
-  },
-];
+  roomList: RoomList[];
 
-  constructor(){
-      
+  constructor(private roomService: RoomService) {
+    // Inject the service
+    this.roomList = this.roomService.getRoomList();
   }
+  selectedRoom(room:RoomList){
+    console.log(room);
+  }
+
   ngOnInit(): void {
-    
+    // Initialization code here
+  }
+
+  ngOnDestroy(): void {
+    console.log('ngOnDestroy is called');
   }
 }
