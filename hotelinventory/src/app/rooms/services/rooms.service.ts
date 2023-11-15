@@ -2,7 +2,7 @@
 
 import { Injectable } from '@angular/core';
 import { RoomList } from '../room';
-
+import {HttpClient} from '@angular/common/http'
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,7 @@ import { RoomList } from '../room';
 export class RoomService {
   private roomList: RoomList[] = [
     {
-      roomNumber: 1,
+      roomNumber: '1',
       roomType: 'Deluxe Room',
       amenities: 'Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen',
       price: 500,
@@ -21,7 +21,7 @@ export class RoomService {
       rating: 4.5,
     },
     {
-      roomNumber: 2,
+      roomNumber: '2',
       roomType: 'Deluxe Room',
       amenities: 'Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen',
       price: 1000,
@@ -32,7 +32,7 @@ export class RoomService {
       rating: 3.45654,
     },
     {
-      roomNumber: 3,
+      roomNumber: '3',
       roomType: 'Private Suite',
       amenities: 'Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen',
       price: 15000,
@@ -43,7 +43,9 @@ export class RoomService {
       rating: 2.6,
     },
   ];
+  constructor(private http:HttpClient){
 
+  }
   getRoomList(): RoomList[] {
     return this.roomList;
   }

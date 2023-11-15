@@ -27,9 +27,9 @@ export class RoomsComponent implements OnInit, OnDestroy {
 
   roomList: RoomList[];
 
-  constructor(private roomService: RoomService) {
+  constructor(private roomsService: RoomService) {
     // Inject the service
-    this.roomList = this.roomService.getRoomList();
+    this.roomList = this.roomsService.getRoomList();
   }
   selectedRoom(room:RoomList){
     console.log(room);
