@@ -4,7 +4,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Room, RoomList } from './room';
 import { RoomService } from './services/rooms.service';
 
-
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
@@ -20,18 +19,28 @@ export class RoomsComponent implements OnInit, OnDestroy {
     totalRooms: 33,
     bookedRooms: 12,
   };
-  
-  toggle(){
-    this.hideRooms=!this.hideRooms;
+
+  toggle() {
+    this.hideRooms = !this.hideRooms;
   }
 
-  roomList: RoomList[];
+  roomList!: RoomList[];
 
   constructor(private roomsService: RoomService) {
     // Inject the service
-    this.roomList = this.roomsService.getRoomList();
+    // Corrected method name to getRoomList
+    // Using subscribe to handle the asynchronous nature
+    this.roomsService.getRoomList().subscribe(
+      (rooms) => {
+        this.roomList = rooms;
+      },
+      (error) => {
+        console.error('Error fetching room list:', error);
+      }
+    );
   }
-  selectedRoom(room:RoomList){
+
+  selectedRoom(room: RoomList) {
     console.log(room);
   }
 

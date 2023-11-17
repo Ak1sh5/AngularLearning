@@ -9,7 +9,7 @@ import { RoomService } from '../rooms/services/rooms.service';
 })
 export class EmployeeComponent implements OnInit{
 
-  constructor(@Self() private roomService: RoomService){
+  constructor(@Self() private roomsService: RoomService){
      
   }
   ngOnInit(): void {
